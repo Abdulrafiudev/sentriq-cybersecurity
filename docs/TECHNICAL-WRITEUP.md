@@ -51,14 +51,14 @@ The obvious build is "send the report to an LLM, store what comes back". We did 
 
 **The system must work when the model does not.** No key, no network, rate limit, outage — the queue still has to move.
 
-So the rule engine runs on **every** report, even when GPT is available, and the two are reconciled:
+So the rule engine runs on **every** report, even when GPT is available, and the two answers are compared:
 
-![Both engines run, their answers are reconciled, and the stored incident reflects the result: disagreement lowers confidence, and the model may raise severity but not bury it.](diagrams/03-rules-gpt-reconciliation.svg)
+![Both engines run and their answers are compared: where they disagree the incident is flagged for an analyst, and the model's own confidence is stored unchanged.](diagrams/03-rules-gpt-reconciliation.svg)
 
 | Stage | Rules contribute | GPT contributes |
 |---|---|---|
 | Redaction | phone, email, account, national ID, money | personal names, internal system names, addresses |
-| Classification | weighted keyword engine, 8 categories, English + Pidgin | contextual classification |
+| Classification | weighted keyword engine, 8 categories, English + Pidgin — **cross-check only** | the classifier |
 | Indicators | URL, domain, IP, hash, email | affected systems, named accounts |
 | Severity | 11 impact factors, 4 mitigations, category baselines | reasoning over context |
 | Routing | ordered policy rules | **nothing — routing is policy, not inference** |

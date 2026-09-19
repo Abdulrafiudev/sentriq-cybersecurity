@@ -133,19 +133,21 @@ Strict layering: **service → hook → component.** A component that wants data
 
 ### Hybrid by design, not by accident
 
-![Both engines run, their answers are reconciled, and the stored incident reflects the result: disagreement lowers confidence, and the model may raise severity but not bury it.](docs/diagrams/03-rules-gpt-reconciliation.svg)
+![Both engines run and their answers are compared: where they disagree the incident is flagged for an analyst, and the model's own confidence is stored unchanged.](docs/diagrams/03-rules-gpt-reconciliation.svg)
 
-The PRD is explicit that predictable data should be handled by code rather than a model, and Sentriq takes that further: **the rule engine runs on every report even when GPT is available**, and the two are reconciled.
+The PRD is explicit that predictable data should be handled by code rather than a model, and Sentriq takes that further: **the rule engine runs on every report even when GPT is available**, and the two answers are compared.
+
+What the rule engine is *for* differs by stage. On redaction and indicators it does the real work, because those values have fixed shapes and a miss is a privacy breach or a blocklist entry an analyst cannot act on. On classification it is a cross-check rather than a co-classifier: on unseen text the model classifies better, and the value of running both is that two independent methods disagreeing is a far more reliable uncertainty signal than asking a model how confident it feels.
 
 | Stage | Rules | GPT |
 |---|---|---|
 | Redaction | phone, email, account, ID, money | names, internal system names, addresses |
-| Classification | weighted keyword engine across 8 categories, incl. Pidgin phrasings | contextual classification |
+| Classification | weighted keyword engine across 8 categories, incl. Pidgin phrasings — **cross-check only** | the classifier |
 | Indicators | URL, domain, IP, hash, email | affected systems, named accounts |
 | Severity | 11 impact factors, 4 mitigations, category baselines | reasoning over context |
 | Routing | ordered policy rules | *never involved* |
 
-Reconciliation rules:
+How the two are combined:
 
 - **Classification** — GPT's category and its own confidence are published untouched. Where the rule engine disagrees, that is shown as a flag on the incident and in the queue, not folded into the score. The rule engine's "confidence" is a keyword-weight score rather than a probability, so blending the two made the published number mean less — and it marked down correct answers whenever the keywords matched an earlier stage of the same attack.
 - **Severity** — GPT may escalate freely but may only de-escalate by **one level** from the rule score. Under-calling a real compromise costs far more than over-calling one.

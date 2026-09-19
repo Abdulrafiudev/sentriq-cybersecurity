@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="680" height="376" viewBox="0 0 680 376" role="img" aria-labelledby="t3 d3" font-family="'IBM Plex Sans', system-ui, -apple-system, sans-serif">
-  <title id="t3">How the rule engine and GPT are reconciled</title>
-  <desc id="d3">A deterministic rule engine runs on every report and GPT runs when an API key is configured. Their answers are reconciled: disagreement lowers the confidence score, and the model may raise severity but may not bury it.</desc>
+  <title id="t3">How the rule engine and GPT are combined</title>
+  <desc id="d3">A deterministic rule engine runs on every report and GPT runs when an API key is configured. Their answers are compared: where they disagree the incident is flagged for an analyst, and the model's own confidence is stored unchanged.</desc>
 
   <defs>
     <marker id="arrow-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -23,11 +23,11 @@
 
   <rect x="195" y="160" width="290" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
   <text x="340" y="185" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Reconciliation</text>
-  <text x="340" y="202" text-anchor="middle" font-size="12" fill="#0E7C5A">Disagreement lowers confidence</text>
+  <text x="340" y="202" text-anchor="middle" font-size="12" fill="#0E7C5A">Disagreement raises a flag</text>
 
   <line x1="340" y1="216" x2="340" y2="270" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
 
   <rect x="195" y="280" width="290" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
   <text x="340" y="305" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Stored incident</text>
-  <text x="340" y="322" text-anchor="middle" font-size="12" fill="#0E7C5A">Model may raise, not bury</text>
+  <text x="340" y="322" text-anchor="middle" font-size="12" fill="#0E7C5A">Model's confidence, unchanged</text>
 </svg>

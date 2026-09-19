@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="600" viewBox="0 0 680 600" role="img" aria-labelledby="t1 d1" font-family="'IBM Plex Sans', system-ui, -apple-system, sans-serif">
+  <title id="t1">Sentriq request lifecycle</title>
+  <desc id="d1">A report submitted by an analyst passes through the Express API, then the triage pipeline which calls OpenAI GPT once, then into MongoDB, and finally onto the dashboard and queue. The Express server owns every decision; the client only renders.</desc>
+
+  <defs>
+    <marker id="arrow-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#8A8F89" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M8 1L2 5L8 9" fill="none" stroke="#8A8F89" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="680" height="600" fill="#F7F7F4"/>
+
+  <rect x="180" y="40" width="220" height="56" rx="8" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1"/>
+  <text x="290" y="65" text-anchor="middle" font-size="14" font-weight="600" fill="#141715" font-family="'Space Grotesk', system-ui, sans-serif">Analyst submits report</text>
+  <text x="290" y="82" text-anchor="middle" font-size="12" fill="#8A8F89">Raw text, any language</text>
+
+  <line x1="290" y1="96" x2="290" y2="146" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="180" y="156" width="220" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="290" y="181" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Express API</text>
+  <text x="290" y="198" text-anchor="middle" font-size="12" fill="#0E7C5A">Auth, validate, controller</text>
+
+  <line x1="290" y1="212" x2="290" y2="262" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="180" y="272" width="220" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="290" y="297" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Triage pipeline</text>
+  <text x="290" y="314" text-anchor="middle" font-size="12" fill="#0E7C5A">Seven stages, server only</text>
+
+  <line x1="400" y1="300" x2="440" y2="300" stroke="#8A8F89" stroke-width="1.5" marker-start="url(#arrow-start)" marker-end="url(#arrow-end)"/>
+
+  <rect x="450" y="272" width="190" height="56" rx="8" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1"/>
+  <text x="545" y="297" text-anchor="middle" font-size="14" font-weight="600" fill="#141715" font-family="'Space Grotesk', system-ui, sans-serif">OpenAI GPT</text>
+  <text x="545" y="314" text-anchor="middle" font-size="12" fill="#8A8F89">One call per report</text>
+
+  <line x1="290" y1="328" x2="290" y2="378" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="180" y="388" width="220" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="290" y="413" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">MongoDB</text>
+  <text x="290" y="430" text-anchor="middle" font-size="12" fill="#0E7C5A">Redacted incident stored</text>
+
+  <line x1="290" y1="444" x2="290" y2="494" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="180" y="504" width="220" height="56" rx="8" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1"/>
+  <text x="290" y="529" text-anchor="middle" font-size="14" font-weight="600" fill="#141715" font-family="'Space Grotesk', system-ui, sans-serif">Dashboard and queue</text>
+  <text x="290" y="546" text-anchor="middle" font-size="12" fill="#8A8F89">Prioritised for the analyst</text>
+</svg>

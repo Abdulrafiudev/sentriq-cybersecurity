@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="376" viewBox="0 0 680 376" role="img" aria-labelledby="t3 d3" font-family="'IBM Plex Sans', system-ui, -apple-system, sans-serif">
+  <title id="t3">How the rule engine and GPT are reconciled</title>
+  <desc id="d3">A deterministic rule engine runs on every report and GPT runs when an API key is configured. Their answers are reconciled: disagreement lowers the confidence score, and the model may raise severity but may not bury it.</desc>
+
+  <defs>
+    <marker id="arrow-end" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#8A8F89" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="680" height="376" fill="#F7F7F4"/>
+
+  <rect x="60" y="40" width="250" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="185" y="65" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Rule engine</text>
+  <text x="185" y="82" text-anchor="middle" font-size="12" fill="#0E7C5A">Runs on every report</text>
+
+  <rect x="370" y="40" width="250" height="56" rx="8" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1"/>
+  <text x="495" y="65" text-anchor="middle" font-size="14" font-weight="600" fill="#141715" font-family="'Space Grotesk', system-ui, sans-serif">GPT</text>
+  <text x="495" y="82" text-anchor="middle" font-size="12" fill="#8A8F89">Runs when a key is set</text>
+
+  <line x1="185" y1="96" x2="272" y2="150" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+  <line x1="495" y1="96" x2="408" y2="150" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="195" y="160" width="290" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="340" y="185" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Reconciliation</text>
+  <text x="340" y="202" text-anchor="middle" font-size="12" fill="#0E7C5A">Disagreement lowers confidence</text>
+
+  <line x1="340" y1="216" x2="340" y2="270" stroke="#8A8F89" stroke-width="1.5" marker-end="url(#arrow-end)"/>
+
+  <rect x="195" y="280" width="290" height="56" rx="8" fill="#E4F5EC" stroke="#BFE6D4" stroke-width="1"/>
+  <text x="340" y="305" text-anchor="middle" font-size="14" font-weight="600" fill="#0A5F45" font-family="'Space Grotesk', system-ui, sans-serif">Stored incident</text>
+  <text x="340" y="322" text-anchor="middle" font-size="12" fill="#0E7C5A">Model may raise, not bury</text>
+</svg>

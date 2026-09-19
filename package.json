@@ -1,0 +1,27 @@
+{
+  "name": "sentriq",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered cybersecurity incident triage \u2014 Track D (Government, Public Sector & National Data)",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n server,client -c green,cyan \"pnpm -F @sentriq/server dev\" \"pnpm -F @sentriq/client dev\"",
+    "dev:server": "pnpm -F @sentriq/server dev",
+    "dev:client": "pnpm -F @sentriq/client dev",
+    "build": "pnpm -F @sentriq/server build && pnpm -F @sentriq/client build",
+    "start": "concurrently -n server,client -c green,cyan \"pnpm -F @sentriq/server start\" \"pnpm -F @sentriq/client start\"",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "seed": "pnpm -F @sentriq/server seed",
+    "evaluate": "pnpm -F @sentriq/server evaluate",
+    "demo": "concurrently -n server,client -c green,cyan \"pnpm -F @sentriq/server demo\" \"pnpm -F @sentriq/client dev\"",
+    "evaluate:memory": "pnpm -F @sentriq/server evaluate:memory",
+    "seed:memory": "pnpm -F @sentriq/server seed:memory"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/**
+ * Sentriq design tokens.
+ *
+ * Every value here comes from the design handoff. Three colour families only:
+ *   - neutrals (paper → ink)
+ *   - Signal Jade, which always means "the system": Sentriq's own actions,
+ *     confidence, and matches. Jade is never used to express severity.
+ *   - severity, which is the only other hue permitted.
+ *
+ * Violet is reserved for "PII / handled by policy" — the Triaged status pill and
+ * redaction tokens share it on purpose.
+ */
+
+@theme {
+  /* --- Neutrals --- */
+  --color-paper: #f7f7f4;
+  --color-surface: #ffffff;
+  --color-sunk: #fafaf7;
+  --color-line: #e4e3dd;
+  --color-line-subtle: #efeee9;
+  --color-line-strong: #d8d7d1;
+  --color-hover: #f2f1ec;
+
+  --color-ink: #141715;
+  --color-ink-body: #3f433f;
+  --color-ink-muted: #5c615d;
+  --color-ink-faint: #8a8f89;
+  --color-ink-disabled: #a2a6a1;
+
+  /* --- Signal Jade --- */
+  --color-jade-50: #e4f5ec;
+  --color-jade-100: #f3fbf7;
+  --color-jade-200: #bfe6d4;
+  --color-jade-300: #cdeadb;
+  --color-jade-400: #d4efe2;
+  --color-jade-600: #0e7c5a;
+  --color-jade-700: #5c7e6f;
+  --color-jade-800: #0a5f45;
+
+  /* --- Severity --- */
+  --color-critical: #a31d21;
+  --color-critical-bg: #fdf1f1;
+  --color-critical-border: #e7c3c4;
+  --color-critical-hover: #fae4e4;
+  --color-critical-sub: #96595b;
+  --color-critical-bar: #c4363a;
+
+  --color-high: #8a4b08;
+  --color-high-bg: #fdf3e7;
+  --color-high-border: #ebd1ae;
+  --color-high-bar: #c97a1e;
+
+  --color-medium: #6b5600;
+  --color-medium-bg: #faf6e2;
+  --color-medium-border: #e3daa8;
+  --color-medium-bar: #b8a02c;
+
+  --color-low: #1a5bb8;
+  --color-low-bg: #eef4fd;
+  --color-low-border: #c7d9f3;
+  --color-low-bar: #3e7bd1;
+
+  /* --- Status pills --- */
+  --color-status-open-border: #d8d7d1;
+  --color-status-merged: #7a7f79;
+  --color-status-merged-bg: #f2f1ec;
+  --color-status-merged-border: #e0dfd9;
+  --color-violet: #4b3a9e;
+  --color-violet-bg: #ede9fb;
+  --color-violet-border: #d6cef5;
+
+  /* --- Type --- */
+  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-sans: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  /* --- Radius --- */
+  --radius-chip: 6px;
+  --radius-pill: 7px;
+  --radius-control: 9px;
+  --radius-inner: 11px;
+  --radius-card: 14px;
+  --radius-flow: 16px;
+
+  /* --- Elevation. Cards are flat; only popovers and drawers lift. --- */
+  --shadow-raised: 0 1px 2px rgb(20 23 21 / 0.05), 0 8px 24px rgb(20 23 21 / 0.06);
+
+  --animate-sq-pulse: sq-pulse 2.2s infinite;
+  --animate-sq-pulse-fast: sq-pulse 1s infinite;
+  --animate-sq-in: sq-in 0.35s ease both;
+}
+
+@keyframes sq-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes sq-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-jade-600);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-jade-800);
+  }
+
+  ::selection {
+    background: #cff0e3;
+    color: #0b1f18;
+  }
+
+  /* Analysts keep the keyboard; make the focus ring unmistakable. */
+  :focus-visible {
+    outline: 2px solid var(--color-jade-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  /* Mono is a hard rule: every machine-generated value uses it. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+
+  .machine {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+  }
+
+  .sticky-blur {
+    backdrop-filter: blur(12px);
+    background: rgb(247 247 244 / 0.86);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .no-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 99px;
+  }
+}

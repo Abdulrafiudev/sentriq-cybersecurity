@@ -21,9 +21,10 @@ const submitLimiter = rateLimit({
   message: { error: { code: "rate_limited", message: "Too many reports submitted. Try again shortly." } },
 });
 
+router.post("/", submitLimiter, validate({ body: createIncidentSchema }), controller.create);
+
 router.use(requireAuth);
 
-router.post("/", submitLimiter, validate({ body: createIncidentSchema }), controller.create);
 router.get("/", validate({ query: listIncidentsSchema }), controller.list);
 router.get("/:id", validate({ params: incidentIdSchema }), controller.getOne);
 router.get("/:id/related", validate({ params: incidentIdSchema }), controller.getRelated);
